@@ -1,0 +1,1298 @@
+
+ -------------------------
+ -------------------------
+ -------------------------LINELINE/** 
+word(Measurement)
+ 
+word(grid)
+ 
+word(Class)
+ **/LINE
+word(function)
+ 
+word(MeasurementGrid)
+(
+word(args)
+){LINE	
+word(this)
+.
+word(id)
+ = 
+word(BUI)
+.
+word(id)
+();LINE	LINE	
+word(this)
+.
+word(height)
+ = 500;LINE	
+word(this)
+.
+word(width)
+ = 800;LINE	LINE	
+word(this)
+.
+word(maxWidth)
+ = 1200;LINE	
+word(this)
+.
+word(maxHeight)
+ = 600;LINE	
+word(this)
+.
+word(minHeight)
+ = 500;LINE	LINE	
+word(this)
+.
+word(unitsFontSize)
+ = 9;LINE	
+word(this)
+.
+word(title)
+ = "
+word(Measurements)
+";LINE	
+word(this)
+.
+word(estimateTime)
+ = 
+word(false)
+;LINE	
+word(this)
+.
+word(collapsed)
+ = 
+word(true)
+;LINE	
+word(this)
+.
+word(tbar)
+ = 
+word(true)
+;LINE	LINE	
+word(this)
+.
+word(showTitle)
+ = 
+word(true)
+;LINE	LINE	
+word(this)
+.
+word(updateRowEnabled)
+ = 
+word(true)
+; LINE	 LINE	/** 
+word(Hash)
+ 
+word(map)
+ 
+word(containing)
+ 
+word(the)
+ 
+word(keys)
+ 
+word(of)
+ 
+word(the)
+ 
+word(editable)
+ 
+word(columns)
+. 
+word(Ex)
+: '
+word(exposureTemperature)
+' **/LINE	
+word(this)
+.
+word(editor)
+ =   {LINE						
+word(comments)
+ : {LINE								
+word(xtype)
+		: '
+word(textfield)
+',LINE								
+word(allowBlank)
+	: 
+word(true)
+LINE						}LINE					};LINE	LINE	
+word(this)
+.
+word(isTimeColumnHidden)
+ = 
+word(false)
+;LINE	
+word(this)
+.
+word(isStatusColumnHidden)
+ = 
+word(false)
+;LINE	
+word(this)
+.
+word(isPriorityColumnHidden)
+ = 
+word(true)
+;LINE	
+word(this)
+.
+word(margin)
+ = "0 0 0 0";LINELINE	/** 
+word(If)
+ 
+word(measurement)
+ 
+word(Status)
+ 
+word(is)
+ 
+word(done)
+ 
+word(mark)
+ 
+word(green)
+ 
+word(row)
+ **/LINE	
+word(this)
+.
+word(markDone)
+ = 
+word(false)
+;LINE	LINE	
+word(this)
+.
+word(addBtnEnable)
+ = 
+word(true)
+;LINE	
+word(this)
+.
+word(sorter)
+ = [{LINE	 	           		
+word(property)
+ : '
+word(priority)
+',LINE	 	                
+word(direction)
+: '
+word(ASC)
+'LINE					}];LINE	LINE	
+word(this)
+.
+word(removeBtnEnabled)
+ = 
+word(false)
+;LINE	
+word(this)
+.
+word(collapseBtnEnable)
+ = 
+word(true)
+;LINE	
+word(this)
+.
+word(addBtnMultipleEdit)
+ = 
+word(false)
+;LINELINE	
+word(var)
+ _
+word(this)
+ = 
+word(this)
+;LINE	
+word(this)
+.
+word(selModel)
+ = 
+word(Ext)
+.
+word(create)
+('
+word(Ext)
+.
+word(selection)
+.
+word(RowModel)
+', {LINE	 	
+word(allowDeselect)
+ : 
+word(true)
+,LINE	 	
+word(mode)
+			: '
+word(MULTI)
+',LINE        
+word(listeners)
+: {LINE            
+word(selectionchange)
+: 
+word(function)
+(
+word(sm)
+, 
+word(selections)
+) {LINE            	
+word(var)
+ 
+word(selected)
+ = 
+word(new)
+ 
+word(Array)
+();LINE            	
+word(for)
+ ( 
+word(var)
+ 
+word(i)
+ = 0; 
+word(i)
+ < 
+word(selections)
+.
+word(length)
+; 
+word(i)
+++) {LINE            		
+word(selected)
+.
+word(push)
+(
+word(selections)
+[
+word(i)
+].
+word(raw)
+);LINE				}LINE            	_
+word(this)
+.
+word(onSelected)
+.
+word(notify)
+(
+word(selected)
+);LINE            }LINE        }LINE    });LINE	LINE	
+word(if)
+ (
+word(args)
+ != 
+word(null)
+){LINE		LINE		LINE		
+word(if)
+ (
+word(args)
+.
+word(tbar)
+ != 
+word(null)
+){LINE			
+word(this)
+.
+word(tbar)
+ = 
+word(args)
+.
+word(tbar)
+;LINE		}LINE		LINE		
+word(if)
+ (
+word(args)
+.
+word(sorter)
+ != 
+word(null)
+){LINE			
+word(this)
+.
+word(sorter)
+ = 
+word(args)
+.
+word(sorter)
+;LINE		}LINE		LINE	}LINE	
+word(this)
+.
+word(onClick)
+ = 
+word(new)
+ 
+word(Event)
+(
+word(this)
+);LINE	
+word(this)
+.
+word(onSelected)
+ = 
+word(new)
+ 
+word(Event)
+(
+word(this)
+);LINE	
+word(this)
+.
+word(onRemoved)
+ = 
+word(new)
+ 
+word(Event)
+(
+word(this)
+);LINE	
+word(this)
+.
+word(onUpdateTime)
+ = 
+word(new)
+ 
+word(Event)
+(
+word(this)
+);LINE	
+word(this)
+.
+word(onMeasurementChanged)
+ = 
+word(new)
+ 
+word(Event)
+(
+word(this)
+);LINE	
+word(this)
+.
+word(onExperimentChanged)
+ = 
+word(new)
+ 
+word(Event)
+(
+word(this)
+);LINE};LINELINELINE
+word(MeasurementGrid)
+.
+word(prototype)
+._
+word(getMenu)
+ = 
+word(function)
+() {LINE	
+word(var)
+ _
+word(this)
+ = 
+word(this)
+;LINE	
+word(if)
+ (
+word(this)
+.
+word(tbar)
+){LINE		LINE		
+word(var)
+ 
+word(items)
+ = 
+word(new)
+ 
+word(Array)
+();LINE		
+word(if)
+ (_
+word(this)
+.
+word(addBtnEnable)
+){LINE			
+word(items)
+.
+word(push)
+(LINE					{LINE						
+word(icon)
+ 			: '../
+word(shared)
+/
+word(icons)
+/
+word(fam)
+/
+word(add)
+.
+word(gif)
+',LINE				        
+word(text)
+			: '
+word(Add)
+',LINE				        
+word(handler)
+			: 
+word(function)
+(){LINE				        					_
+word(this)
+.
+word(openAddMeasurementWindow)
+();LINE				        }LINE				  }LINE			);LINE		}LINE		LINE		
+word(if)
+ (_
+word(this)
+.
+word(addBtnMultipleEdit)
+){LINE			
+word(items)
+.
+word(push)
+( {LINE				
+word(icon)
+ 			: '../
+word(shared)
+/
+word(icons)
+/
+word(fam)
+/
+word(edit)
+-
+word(icon)
+.
+word(png)
+',LINE		        
+word(text)
+			: '
+word(Multiple)
+ 
+word(Edit)
+',LINE		        
+word(handler)
+			: 
+word(function)
+(){LINE		        						
+word(var)
+ 
+word(multipleEditMeasurementGridWindow)
+ = 
+word(new)
+ 
+word(MultipleEditMeasurementGridWindow)
+();LINE		        						
+word(multipleEditMeasurementGridWindow)
+.
+word(onExperimentChanged)
+.
+word(attach)
+(
+word(function)
+(
+word(sender)
+, 
+word(data)
+){LINE		        							_
+word(this)
+.
+word(onExperimentChanged)
+.
+word(notify)
+(
+word(data)
+);LINE		        						});LINE		        						LINE		        						
+word(multipleEditMeasurementGridWindow)
+.
+word(draw)
+(_
+word(this)
+.
+word(measurements)
+, _
+word(this)
+.
+word(experiments)
+);LINE		        	LINE		        }LINE			 });LINE		}LINE		LINE		
+word(items)
+.
+word(push)
+(  "->");LINE		LINE		
+word(if)
+ (_
+word(this)
+.
+word(collapseBtnEnable)
+){LINE			
+word(items)
+.
+word(push)
+( {LINE		        
+word(text)
+			: '
+word(Collapse)
+ 
+word(buffers)
+',LINE		        
+word(enableToggle)
+	: 
+word(true)
+,LINE		        
+word(scope)
+			: 
+word(this)
+,LINE		        
+word(toggleHandler)
+	: 
+word(function)
+(
+word(item)
+, 
+word(pressed)
+){LINE		        	
+word(this)
+.
+word(collapsed)
+ = 
+word(pressed)
+;LINE		        	
+word(this)
+.
+word(grid)
+.
+word(getStore)
+().
+word(loadData)
+(
+word(this)
+.
+word(prepareData)
+(
+word(this)
+.
+word(measurements)
+, 
+word(this)
+.
+word(experiments)
+), 
+word(false)
+);LINE		        },LINE		        
+word(pressed)
+: 
+word(this)
+.
+word(collapsed)
+LINE			 });LINE		}LINE		 
+word(var)
+ 
+word(tb)
+ = 
+word(Ext)
+.
+word(create)
+('
+word(Ext)
+.
+word(toolbar)
+.
+word(Toolbar)
+', {LINE			    
+word(items)
+: 
+word(items)
+LINE			});LINE		 LINE		
+word(return)
+ 
+word(tb)
+;LINE	}LINE	
+word(else)
+{LINE		
+word(return)
+ 
+word(null)
+;LINE	}LINE};LINELINE//
+word(MeasurementGrid)
+.
+word(prototype)
+._
+word(checkMacromoleculeFilter)
+ = 
+word(function)
+(
+word(macromoleculeId)
+) {LINE//	
+word(if)
+ (
+word(this)
+.
+word(macromoleculeFilterId)
+ == 
+word(null)
+){LINE//		
+word(return)
+ 
+word(true)
+;LINE//	}LINE//	
+word(else)
+{LINE//		
+word(for)
+ ( 
+word(var)
+ 
+word(i)
+ = 0; 
+word(i)
+ < 
+word(this)
+.
+word(macromoleculeFilterId)
+.
+word(length)
+; 
+word(i)
+++) {LINE//			
+word(if)
+ (
+word(this)
+.
+word(macromoleculeFilterId)
+[
+word(i)
+] == 
+word(macromoleculeId)
+){LINE//				
+word(return)
+ 
+word(true)
+;LINE//			}LINE//		}LINE//	}LINE//	
+word(return)
+ 
+word(false)
+;LINE//};LINELINE
+word(MeasurementGrid)
+.
+word(prototype)
+.
+word(openAddMeasurementWindow)
+ = 
+word(function)
+(
+word(measurements)
+, 
+word(experiments)
+){LINE	
+word(var)
+ _
+word(this)
+ = 
+word(this)
+;LINE	LINE 	
+word(var)
+ 
+word(wizardWidget)
+ = 
+word(new)
+ 
+word(WizardWidget)
+();LINE	LINE 	
+word(wizardWidget)
+.
+word(onFinished)
+.
+word(attach)
+(
+word(function)
+(
+word(sender)
+, 
+word(result)
+){LINE 		LINE		
+word(var)
+ 
+word(adapter)
+ = 
+word(new)
+ 
+word(BiosaxsDataAdapter)
+();LINE		
+word(adapter)
+.
+word(onSuccess)
+.
+word(attach)
+(
+word(function)
+(
+word(sender)
+, 
+word(data)
+){LINE			 _
+word(this)
+.
+word(onExperimentChanged)
+.
+word(notify)
+(
+word(data)
+);LINE			 _
+word(this)
+.
+word(grid)
+.
+word(setLoading)
+(
+word(false)
+);	LINE			 
+word(wizardWidget)
+.
+word(window)
+.
+word(close)
+();	LINE			 LINE			 /** 
+word(Setting)
+ 
+word(priorities)
+ **/LINE//			 
+word(var)
+ 
+word(adapterPriorities)
+ = 
+word(new)
+ 
+word(BiosaxsDataAdapter)
+();LINE//			 
+word(adapterPriorities)
+.
+word(onSuccess)
+.
+word(attach)
+(
+word(function)
+(
+word(sender)
+, 
+word(data)
+){LINE//				 
+word(var)
+ 
+word(experimentList)
+ =  
+word(new)
+ 
+word(ExperimentList)
+([
+word(new)
+ 
+word(Experiment)
+(
+word(data)
+)]);LINE//				 _
+word(this)
+.
+word(refresh)
+(
+word(experimentList)
+.
+word(getMeasurementsNotCollected)
+(), 
+word(experimentList)
+);LINE//				 _
+word(this)
+.
+word(showStatusBarReady)
+();LINE//			 });LINE//			 
+word(adapterPriorities)
+.
+word(onError)
+.
+word(attach)
+(
+word(function)
+(
+word(sender)
+, 
+word(error)
+){LINE//				 
+word(showError)
+(
+word(error)
+);LINE//			 });LINE//			 LINE//			 
+word(adapterPriorities)
+.
+word(setPriorities)
+(_
+word(this)
+.
+word(experiments)
+.
+word(experiments)
+[0].
+word(experimentId)
+);LINE//			 _
+word(this)
+.
+word(showStatusBarBusy)
+('
+word(ISPyB)
+ 
+word(is)
+ 
+word(optimizing)
+ 
+word(the)
+ 
+word(number)
+ 
+word(of)
+ 
+word(measurements)
+');LINE			LINE		});LINE		
+word(wizardWidget)
+.
+word(current)
+.
+word(setLoading)
+("
+word(ISPyB)
+: 
+word(Adding)
+ 
+word(measurements)
+");LINE		
+word(adapter)
+.
+word(addMeasurements)
+(
+word(result)
+.
+word(name)
+, "
+word(comments)
+", 
+word(result)
+.
+word(data)
+, _
+word(this)
+.
+word(experiments)
+.
+word(experiments)
+[0].
+word(experimentId)
+);LINE	});LINE 	LINE 	LINE	
+word(wizardWidget)
+.
+word(draw)
+(
+word(null)
+, 
+word(new)
+ 
+word(MeasurementCreatorStepWizardForm)
+(
+word(BIOSAXS)
+.
+word(proposal)
+.
+word(getMacromolecules)
+(), {
+word(noNext)
+:
+word(true)
+}));LINE};LINE
+word(MeasurementGrid)
+.
+word(prototype)
+.
+word(prepareData)
+ = 
+word(function)
+(
+word(measurements)
+, 
+word(experiments)
+){LINE	
+word(var)
+ 
+word(data)
+ = 
+word(new)
+ 
+word(Array)
+();LINE			LINE	
+word(for)
+ (
+word(var)
+ 
+word(i)
+ = 0; 
+word(i)
+ < 
+word(measurements)
+.
+word(length)
+; 
+word(i)
+++){LINE		
+word(var)
+ 
+word(measurement)
+ = 
+word(measurements)
+[
+word(i)
+];LINE		
+word(var)
+ 
+word(specimen)
+ = 
+word(experiments)
+.
+word(getSampleById)
+(
+word(measurement)
+.
+word(specimenId)
+);LINE		LINE		
+word(var)
+ 
+word(buffer)
+ = 
+word(experiments)
+.
+word(getBufferById)
+(
+word(specimen)
+.
+word(bufferId)
+)LINE		
+word(measurement)
+["
+word(buffer)
+_
+word(acronym)
+"] = 
+word(buffer)
+.
+word(acronym)
+;LINE		
+word(measurement)
+["
+word(bufferId)
+"] = 
+word(buffer)
+.
+word(bufferId)
+;LINE		
+word(measurement)
+["
+word(volume)
+"] = 
+word(specimen)
+.
+word(volume)
+;LINE		
+word(if)
+ (
+word(specimen)
+.
+word(macromolecule)
+3
+word(VO)
+ != 
+word(null)
+){LINE			
+word(measurement)
+["
+word(acronym)
+"] = 
+word(specimen)
+.
+word(macromolecule)
+3
+word(VO)
+.
+word(acronym)
+;LINE			
+word(measurement)
+["
+word(macromoleculeId)
+"] = 
+word(specimen)
+.
+word(macromolecule)
+3
+word(VO)
+.
+word(macromoleculeId)
+;LINE//			
+word(if)
+ (!
+word(this)
+._
+word(checkMacromoleculeFilter)
+(
+word(specimen)
+.
+word(macromolecule)
+3
+word(VO)
+.
+word(macromoleculeId)
+)){LINE//				
+word(continue)
+;LINE//			}LINE		}LINE		
+word(measurement)
+["
+word(concentration)
+"] = 
+word(specimen)
+.
+word(concentration)
+;LINE		
+word(if)
+ (
+word(measurement)
+.
+word(run)
+3
+word(VO)
+ != 
+word(null)
+){LINE				
+word(measurement)
+["
+word(energy)
+"] = 
+word(measurement)
+.
+word(run)
+3
+word(VO)
+.
+word(energy)
+;LINE				
+word(measurement)
+["
+word(expExposureTemperature)
+"] = 
+word(measurement)
+.
+word(run)
+3
+word(VO)
+.
+word(exposureTemperature)
+;LINE				
+word(measurement)
+["
+word(storageTemperature)
+"] = 
+word(measurement)
+.
+word(run)
+3
+word(VO)
+.
+word(storageTemperature)
+;LINE				
+word(measurement)
+["
+word(timePerFrame)
+"] = 
+word(measurement)
+.
+word(run)
+3
+word(VO)
+.
+word(timePerFrame)
+;LINE				
+word(measurement)
+["
+word(radiationAbsolute)
+"] = 
+word(measurement)
+.
+word(run)
+3
+word(VO)
+.
+word(radiationAbsolute)
+;LINE				
+word(measurement)
+["
+word(radiationRelative)
+"] = 
+word(measurement)
+.
+word(run)
+3
+word(VO)
+.
+word(radiationRelative)
+;LINE				
+word(measurement)
+["
+word(status)
+"] = "
+word(DONE)
+";LINE			LINE			
+word(try)
+{LINE				
+word(measurement)
+["
+word(miliseconds)
+"] = 
+word(moment)
+( 
+word(measurement)
+.
+word(run)
+3
+word(VO)
+.
+word(timeStart)
+).
+word(format)
+("
+word(X)
+");LINE			}LINE			
+word(catch)
+(
+word(E)
+){LINE				
+word(console)
+.
+word(log)
+(
+word(E)
+);LINE			}LINE		}LINELINE		
+word(if)
+ (
+word(this)
+.
+word(collapsed)
+){LINE			/** 
+word(If)
+ 
+word(collapsed)
+ 
+word(only)
+ 
+word(the)
+ 
+word(samples)
+ **/LINE			
+word(if)
+ (
+word(specimen)
+.
+word(macromolecule)
+3
+word(VO)
+ != 
+word(null)
+){LINE				
+word(data)
+.
+word(push)
+(
+word(measurement)
+);LINE			}LINE		}LINE		
+word(else)
+{LINE			
+word(data)
+.
+word(push)
+(
+word(measurement)
+);LINE		}LINE		LINE	}LINE	
+word(return)
+ 
+word(data)
+;LINE};LINELINELINE
+word(MeasurementGrid)
+.
+word(prototype)
+.
+word(refresh)
+ = 
+word(function)
+(
+word(measurements)
+, 
+word(experiments)
+){LINE	
+word(this)
+.
+word(experiments)
+ = 
+word(experiments)
+;LINE	
+word(this)
+.
+word(measurements)
+ = 
+word(measurements)
+;LINE	
+word(this)
+.
+word(store)
+.
+word(loadData)
+(
+word(this)
+.
+word(prepareData)
+(
+word(measurements)
+, 
+word(experiments)
+), 
+word(false)
+);LINE};LINELINE
+word(MeasurementGrid)
+.
+word(prototype)
+.
+word(showStatusBarBusy)
+ = 
+word(function)
+(
+word(msg)
+){LINE	
+word(var)
+ 
+word(statusBar)
+ = 
+word(Ext)
+.
+word(getCmp)
+(
+word(this)
+.
+word(id)
+ + '
+word(basic)
+-
+word(statusbar)
+');LINE	
+word(statusBar)
+.
+word(setStatus)
+({LINE	    
+word(text)
+		: 
+word(msg)
+,LINE	    
+word(iconCls)
+		: '
+word(x)
+-
+word(status)
+-
+word(busy)
+',LINE	    
+word(clear)
+		: 
+word(false)
+LINE	});LINE};LINE

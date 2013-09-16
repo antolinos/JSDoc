@@ -1,0 +1,48 @@
+{
+	comments	:	'     Measurement grid Class ',
+	className	:	'MeasurementGrid',
+	parameters	:	['args'],
+
+},
+{
+	type		:	'method',
+	className	:	'MeasurementGrid',
+	name		:	'_getMenu ',
+	parameters	:	[' '],
+
+},
+{
+	type		:	'method',
+	className	:	'MeasurementGrid',
+	name		:	'_checkMacromoleculeFilter ',
+	parameters	:	[' macromoleculeId'],
+
+},
+{
+	type		:	'method',
+	className	:	'MeasurementGrid',
+	name		:	'openAddMeasurementWindow ',
+	parameters	:	[' measurements',' experiments'],
+
+},
+{
+	type		:	'method',
+	className	:	'MeasurementGrid',
+	name		:	'prepareData ',
+	parameters	:	[' measurements',' experiments'],
+
+},
+{
+	type		:	'method',
+	className	:	'MeasurementGrid',
+	name		:	'refresh ',
+	parameters	:	[' measurements',' experiments'],
+
+},
+{
+	type		:	'method',
+	className	:	'MeasurementGrid',
+	name		:	'showStatusBarBusy ',
+	parameters	:	[' msg'],
+
+},

@@ -1,0 +1,50 @@
+
+
+
+******************
+
+
+{
+	type		:	'method',
+	className	:	'MeasurementGrid',
+	name		:	'refresh ',
+	parameters	:	[' measurements'],
+
+},
+
+
+
+
+{
+55 [
+
+
+some comemnts 
+@param1	: sdfsdfs
+@param2	: asdasdas
+]
+	comments	:	'
+
+
+some comemnts 
+@param1	: sdfsdfs
+@param2	: asdasdas
+',
+	type		:	'method',
+	className	:	'MeasurementGrid',
+	name		:	'showStatusBarBusy ',
+	parameters	:	[' p1 ','p2',' p3'],
+
+},
+
+
+
+
+
+
+
+
+
+
+
+
