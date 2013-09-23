@@ -18,16 +18,16 @@
 %}
 
 %{
-int num_lines = 0, num_chars = 0;
-
+int num_lines = 1, num_chars = 0;
+char* fileName;
 
 
 %}
 
 %x 			comment
 
-START_COMMENT		"/**"
-END_COMMENT		"**/"
+START_COMMENT		"/**"|"/*"
+END_COMMENT		"**/"|"*/"
 		
 COMMENT			{CARRIAGE_RETURN}*{START_COMMENT}[^"**/"]*{END_COMMENT}{CARRIAGE_RETURN}*
 INLINE_COMMENT		"//"
@@ -37,7 +37,7 @@ LINE_BREAK   		[ \n]*
 
 DIGIT    		[0-9]
 LOWER_CASE_WORD		[a-zA-Z0-9]*
-PASCAL_CASE_WORD       	["_"]*[A-Z][a-z0-9]*
+PASCAL_CASE_WORD       	["_"]*[A-Z][a-z0-9"_"]*
 PASCAL_CASE_WORDS	{PASCAL_CASE_WORD}*
 
 CAMEL_CASE_WORD       	[A-Z]*[a-z0-9]*
@@ -68,32 +68,74 @@ CARRIAGE_RETURN		[\n]|[\r]
 							//printf( "XX: %s\n", yytext ); 
 						}
 {INLINE_COMMENTS}{FUNCTION}			{}
-{CARRIAGE_RETURN}				{
-							//printf( "cr: %s\n", yytext ); 
+
+\n						{
+							num_lines ++;
+							//printf("\n%i", num_lines);
 						}
+	
+{CARRIAGE_RETURN}				{
+							
+						}
+
 {FUNCTION}	 	   			{
-							//printf( "Class: %s\n", yytext ); 
+							char *function = yytext;
 							printf("{\n");
-							parseFunction(yytext);  
+									char *aux = getLeftSide(function, "(");
+								      	removeSubstring(aux, "function");
+									char *params = getRightSide(function, "(");
+									printf("\tline\t\t:\t'%i',\n", num_lines);
+									printf("\tfile\t\t:\t'%s',\n", fileName);
+									printf("\tclassName\t:\t'%s',\n", trimwhitespace(aux));
+									if (strlen(params) > 2){
+										parseParams(params);
+									}
 							printf("\n},\n");   
 						} 						
-{COMMENT}+[ \r]*[ \n]*{FUNCTION}
-/*{COMMENTED_FUNCTION}	 	   		{
-							//parseComments(yytext); 
+
+
+{COMMENT}+[ \r]*[ \n]*{FUNCTION}	 	{
+							char *function = yytext;
 							printf("{\n");
-							parseCommentedFunction(yytext); 
+								parseComments(function);
+								char *aux = getLeftSide(function, "(");
+							      	removeSubstring(aux, "function");
+								char *params = getRightSide(function, "(");
+								printf("\tline\t\t:\t'%i',\n", num_lines);
+								printf("\tfile\t\t:\t'%s',\n", fileName);
+								printf("\tclassName\t:\t'%s',\n", trimwhitespace(aux));
+								parseParams(params);
 							printf("\n},\n");   
-						} */
+						} 
 {PROTOTYPE}					{	
-							//printf( "Prototype: %s\n", yytext ); 
+							char *function = yytext;
+							
+							
 							printf("{\n");
-							parsePrototype(yytext); 
-							printf("\n},\n");    
+								printf("\ttype\t\t:\t'method',\n");
+								char *aux = getLeftSide(function, ".prototype.");
+								printf("\tline\t\t:\t'%i',\n", num_lines);
+								printf("\tfile\t\t:\t'%s',\n", fileName);
+								printf("\tclassName\t:\t'%s',\n", trimwhitespace(aux));
+								char *right = getRightSide(function, ".prototype.");
+								char *left = getLeftSide(right, "=");
+
+								removeSubstring(left, ".prototype.");
+								
+								printf("\tname\t\t:\t'%s',\n", left);
+	
+								
+								char *params = getRightSide(function, "=");
+								
+								removeSubstring(params, "function");	
+								removeSubstring(params, "=");
+								//printf("\tyyparamsff\t\t:\t'%s',\n", params);
+								parseParams(params);  
+							printf("\n},\n");   
 						}
 {COMMENTED_PROTOTYPE}				{	
 							//printf( "Prototype: %s\n", yytext ); 
 							printf("{\n");
-							
 							parseCommentedPrototype(yytext); 
 							printf("\n},\n");        
 						}
@@ -101,7 +143,6 @@ CARRIAGE_RETURN		[\n]|[\r]
 						/*printf( "PARAMS: %s\n", yytext );*/
 
  
-
 
 
 
@@ -124,10 +165,11 @@ main(int argc, char **argv)
   }
 
    
-
+  printf( "[\n");
   for(i = 1; i < argc; i++) {
     FILE *f = fopen(argv[i], "r");
-  
+    fileName = argv[i];
+    num_lines = 1;
     if(!f) {
       perror(argv[i]);
       return (1);
@@ -142,7 +184,7 @@ main(int argc, char **argv)
 
 
   }
- 
+   printf( "]\n");
   return 0;
 }
 

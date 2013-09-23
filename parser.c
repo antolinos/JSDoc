@@ -29,7 +29,7 @@ char* getRightSide(const char* string, const char* matcher){
        *(Right - 1) = '\0';
  
        // print the results
-       // printf("getRightSide    Original : %s\nLeft side: %s\nRight side: %s\tMatcher: %s\n\n\n",string,Left,Right,matcher);
+       //printf("getRightSide    Original : %s\nLeft side: %s\nRight side: %s\tMatcher: %s\n\n\n",string,Left,Right,matcher);
  
        // clean up the mess
        free(Left);
@@ -45,10 +45,12 @@ void removeSubstring(char *s,const char *toremove){
 
 char* getLeftSide(const char* string, const char* matcher){
        char *Left;
-       char *Right;          
+       char *Right;       
+	
        // first make a copy
        Left = strdup(string); 
        // second locate the desired text
+	
        Right = strstr(Left,matcher);
  
        // third split the string
@@ -62,8 +64,7 @@ char* getLeftSide(const char* string, const char* matcher){
        return Left;
 }
 
-char** str_split(char* a_str, const char a_delim)
-{
+char** str_split(char* a_str, const char a_delim){
     char** result    = 0;
     size_t count     = 0;
     char* tmp        = a_str;
@@ -85,7 +86,7 @@ char** str_split(char* a_str, const char a_delim)
        knows where the list of returned strings ends. */
     count++;
 
-    result = malloc(sizeof(char*) * count);
+    result = malloc(sizeof(char*) * count + 100);
 
     if (result){
         size_t idx  = 0;
@@ -168,15 +169,16 @@ void replace_char_from_string(char from, char to, char *str)
 }
 
 void parseComments(char* function){
-	char *aux = getLeftSide(function, "**/");
+	char *aux = getLeftSide(function, "*/");
 	removeSubstring(function, aux);
-	removeSubstring(function, "**/");
-	removeSubstring(aux, "/**");
-
+	removeSubstring(function, "*/");
+	removeSubstring(aux, "/*");
+	removeSubstring(aux, "'");
 	strchop(aux);
 	printf("\tcomments\t:\t'%s',\n",aux);
 	
 }
+/*
 void parseCommentedFunction(char* function){
 	parseComments(function);
 	char *aux = getLeftSide(function, "(");
@@ -187,7 +189,7 @@ void parseCommentedFunction(char* function){
 	parseParams(params);
 
 }
-
+*/
 void parseFunction(char* function){
       	char *aux = getLeftSide(function, "(");
       	removeSubstring(aux, "function");
@@ -202,9 +204,10 @@ void parsePrototype(char* function){
 	printf("\ttype\t\t:\t'method',\n");
 	char *aux = getLeftSide(function, ".prototype.");
 	printf("\tclassName\t:\t'%s',\n", trimwhitespace(aux));
+
 	char *right = getRightSide(function, ".prototype.");
 	char *left = getLeftSide(right, "=");
-
+	
 	removeSubstring(left, ".prototype.");
 	
 	printf("\tname\t\t:\t'%s',\n", left);
