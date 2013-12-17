@@ -23,13 +23,18 @@ char* fileName;
 
 
 %}
-
+ 
 %x 			comment
 
 START_COMMENT		"/**"|"/*"
 END_COMMENT		"**/"|"*/"
-		
-COMMENT			{CARRIAGE_RETURN}*{START_COMMENT}[^"**/"]*{END_COMMENT}{CARRIAGE_RETURN}*
+
+KEY			"\173"
+KEY_CLOSE		"\175"
+
+INSIDE_COMMENT		[^{END_COMMENT}]|WHITE_SPACES|LINE_BREAK|[ \r]|[A-Z]
+
+COMMENT			{CARRIAGE_RETURN}*{START_COMMENT}{INSIDE_COMMENT}*{END_COMMENT}{CARRIAGE_RETURN}*
 INLINE_COMMENT		"//"
 INLINE_COMMENTS		{INLINE_COMMENT}+
 WHITE_SPACES   		[ \t]*
@@ -43,14 +48,15 @@ PASCAL_CASE_WORDS	{PASCAL_CASE_WORD}*
 CAMEL_CASE_WORD       	[A-Z]*[a-z0-9]*
 CAMEL_CASE_WORDS	["_"]*{CAMEL_CASE_WORD}*
 
-
+INHERITANCE_METHOD	{WHITE_SPACES}{PASCAL_CASE_WORD}+".prototype."["_"]*{LOWER_CASE_WORD}+{WHITE_SPACES}
+INHERITANCE		{INHERITANCE_METHOD}+"="{INHERITANCE_METHOD}+
 /** FUNCTION: function  MeasurementGridHead(param1, param2, para3)  **/
 FUNCTION		{FUNCTION_HEADER}
 /** COMMENTED_FUNCTION	{COMMENT}+[\r]*[\n]*{FUNCTION} **/
 COMMENTED_FUNCTION	{COMMENT}+[ \r]*[ \n]*{FUNCTION}
 			
 
-FUNCTION_HEADER		{WHITE_SPACES}function[ \t]+{PASCAL_CASE_WORDS}{PARAMS}
+FUNCTION_HEADER		"\n"+{WHITE_SPACES}function[ \t]+{PASCAL_CASE_WORDS}{PARAMS}
 PARAMS			{WHITE_SPACES}"("{PARAM}*{LAST_PARAM}*")"{WHITE_SPACES}
 PARAM			{WHITE_SPACES}{LOWER_CASE_WORD}{WHITE_SPACES}","
 LAST_PARAM		{WHITE_SPACES}{LOWER_CASE_WORD}{WHITE_SPACES}
@@ -64,15 +70,43 @@ CARRIAGE_RETURN		[\n]|[\r]
 
 /** RULES **/
 %%
-{INLINE_COMMENTS}{PROTOTYPE}			{
-							//printf( "XX: %s\n", yytext ); 
-						}
-{INLINE_COMMENTS}{FUNCTION}			{}
-
 \n						{
 							num_lines ++;
 							//printf("\n%i", num_lines);
 						}
+{COMMENT}					{
+							num_lines ++;
+							//printf("----");
+							//printf( "COMMENT: %s\n", yytext ); 
+							//printf("----");
+						}
+{INHERITANCE}					{
+							num_lines ++;
+							
+							char *function = yytext;
+							printf("{\n");
+									printf("\ttype\t\t:\t'method',\n");
+									printf("\tline\t\t:\t'%i',\n", num_lines);
+									char *aux = getLeftSide(function, "=");
+								      	removeSubstring(aux, "prototype");
+									char *className = getLeftSide(aux, "..");
+
+									char *name = getRightSide(aux, "..");
+									removeSubstring(name, "..");
+									
+									printf("\tfile\t\t:\t'%s',\n", fileName);
+									printf("\tclassName\t\t:\t'%s',\n", className);
+									printf("\tname\t\t:\t'%s',\n", name);
+									printf("\tparameters\t\t:\t[],\n");
+									
+							printf("\n},\n");   
+						}
+{INLINE_COMMENTS}{PROTOTYPE}			{
+							//printf( "{INLINE_COMMENTS}{PROTOTYPE}: %s\n", yytext ); 
+						}
+{INLINE_COMMENTS}{FUNCTION}			{}
+
+
 	
 {CARRIAGE_RETURN}				{
 							
@@ -80,6 +114,7 @@ CARRIAGE_RETURN		[\n]|[\r]
 
 {FUNCTION}	 	   			{
 							char *function = yytext;
+							
 							printf("{\n");
 									char *aux = getLeftSide(function, "(");
 								      	removeSubstring(aux, "function");
@@ -137,6 +172,8 @@ CARRIAGE_RETURN		[\n]|[\r]
 							//printf( "Prototype: %s\n", yytext ); 
 							printf("{\n");
 							parseCommentedPrototype(yytext); 
+							printf("\tline\t\t:\t'%i',\n", num_lines);
+							printf("\tfile\t\t:\t'%s',\n", fileName);
 							printf("\n},\n");        
 						}
 

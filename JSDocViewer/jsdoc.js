@@ -1,4 +1,4 @@
-[
+var doc = [
 {
 	type		:	'method',
 	line		:	'1',

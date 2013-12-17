@@ -1,0 +1,317 @@
+<html>
+
+
+<head>
+<title>JS Doc</title>
+
+
+<style>
+
+table.parameters	{border-collapse:collapse;}
+.doc_parameter  	{font-weight:bold;}
+.title 				{font-weight:bold;color:gray;}
+.methodName 		{font-weight:bold;font-size:12px;}
+.paramName			{color:gray;font-size:12px;}
+.vizTest			{background-color:white;}
+.vizCode			{background-color:white;padding:10px}
+.doc_description	{color:gray;}
+.classHeaderName	{font-weight:bold;font-size:14px; }
+.unitHeaderName 	{font-weight:bold;font-size:10px; }
+.doc_params_header  {font-weight:bold; font-size:14px;border:1px black solid;}
+.doc_params  		{font-weight:bold; font-size:12px;}
+.params_desc		{font-size:12px;}
+.small				{font-size:11px;}
+.methodTableHeader 	{	
+						font-size:11px;
+						border-bottom:1pt solid blue;
+						}
+.interface			{
+						font-weight:bold; 
+						font-size:12px;
+						border: 1px solid black;
+						color	: #088A08;
+						background-color:#E6F8E0;
+					}	
+.candidate			{
+						font-weight:bold; 
+						font-size:12px;
+						border: 1px solid black;
+						color	: #AEB404;
+						background-color:#F7F8E0;
+					}		
+					
+										
+.tryitbtn		{
+					display:inline-block;
+					color:#FFFFFF;
+					background-color:#8AC007;
+					font-weight:bold;
+					font-size:12px;
+					text-align:center;
+					padding-left:10px;
+					padding-right:10px;
+					padding-top:3px;
+					padding-bottom:4px;
+					text-decoration:none;
+					margin-left:5px;
+					margin-top:0px;
+					margin-bottom:5px;
+					border:1px solid #aaaaaa;
+					border-radius:5px;
+					white-space:nowrap;
+}
+
+.tryitbtn:hover		{
+					display:inline-block;
+					color:#8AC007;
+					background-color:white;
+					font-weight:bold;
+					font-size:12px;
+					text-align:center;
+					padding-left:10px;
+					padding-right:10px;
+					padding-top:3px;
+					padding-bottom:4px;
+					text-decoration:none;
+					margin-left:5px;
+					margin-top:0px;
+					margin-bottom:5px;
+					border:1px solid #aaaaaa;
+					border-radius:5px;
+					white-space:nowrap;
+					cursor: hand;
+}
+
+</style>
+
+
+
+</head>
+										
+			<!--  JS DOC -->  				
+
+				 
+				
+				 <!-- 
+						<script type="text/javascript" src="../ext-4.0.7/ext-all.js"></script>
+						 <link rel="stylesheet" href="../ext-4.0.7/resources/css/ext-all.css">    
+				  -->  
+				 	<script type="text/javascript" src="../ext-4.2.1/ext-all.js"></script>
+					<link rel="stylesheet" href="../ext-4.2.1/resources/css/ext-all-neptune.css">   
+					<script type="text/javascript"src="../external/jquery-1.7.1.min.js"></script>
+					
+					<link rel="stylesheet" type="text/css" href="../css/jquery.qtip.min.css">
+					<script type="text/javascript"src="../external/jquery.qtip.min.js"></script>
+					
+					
+					
+					<link rel="stylesheet" href="http://pcantolinos:8082/js/css/ispyb_js_custom.css">   
+					
+					<script language="javascript" type="text/javascript" src='output.json'></script>
+					<script language="javascript" type="text/javascript" src='jsdoc-engine.js'></script>
+					
+					
+					
+					<script src="../external/moment.min.js"/></script>
+
+
+					<script  src="../biosaxs/doc/DataDoc.js"/></script>
+					
+					
+					<!-- BIOSAS JS   -->   
+					<script  src="../biosaxs/utils/genericwindow.js"/></script>
+					<script src="../biosaxs/utils/event.js"/></script>
+					<script src="../biosaxs/utils/biosaxsinterfaceutils.js"/></script>
+					<script src="../biosaxs/utils/json2.js"/></script>
+					
+					<!--  DATA -->
+					<script src="../biosaxs/data/proposal.js"/></script>
+					<script src="../biosaxs/data/experiment.js"/></script>
+					<script src="../biosaxs/data/experiments.js"/></script>
+					<script src="../biosaxs/data/dataadapter.js"/></script>
+					<script src="../biosaxs/data/shipment.js"/></script>
+					   
+					<!--  GRAPH -->
+					<script type="text/javascript" src="../biosaxs/dygraph/dygraph-dev.js"></script>
+					
+					   
+					<script src="../biosaxs/widget/dygraphwidget.js"/></script>
+					<script src="../biosaxs/graph/genericgraph.js"/></script>
+					<script src="../biosaxs/graph/stddevdygraph.js"/></script>
+					<script src="../biosaxs/graph/rangewhiskergraph.js"/></script>
+					<script src="../biosaxs/graph/boxwhiskergraph.js"/></script>
+					<script src="../biosaxs/graph/hplcgraph.js"/></script>
+					<script src="../biosaxs/graph/commons/data/layoutmanager.js"/></script>
+					<script src="../biosaxs/graph/commons/data/dataset/dataset.js"/></script>
+					<script src="../biosaxs/graph/commons/data/dataset/network/graphdataset.js"/></script>
+					<script src="../biosaxs/graph/commons/data/dataset/network/graphitem.js"/></script>
+					<script src="../biosaxs/graph/commons/data/dataset/network/vertex.js"/></script>
+					<script src="../biosaxs/graph/commons/data/dataset/network/edge.js"/></script>
+					<script src="../biosaxs/graph/commons/data/networkdatasetformatter.js"/></script>
+					<script src="../biosaxs/graph/commons/data/itemgraphformatter.js"/></script>
+					<script src="../biosaxs/graph/commons/data/vertexgraphformatter.js"/></script>
+					<script src="../biosaxs/graph/commons/data/edgegraphformatter.js"/></script>
+					<script src="../biosaxs/graph/graphcanvas.js"/></script>
+					<script src="../biosaxs/graph/dependencies/dom-utils.js"/></script>
+					<script src="../biosaxs/graph/dependencies/dom-utils.js"/></script>
+					<script src="../biosaxs/graph/dependencies/graphics/graphics_svg.js"/></script>
+					<script src="../biosaxs/graph/dependencies/normalization.js"/></script>
+					<script src="../biosaxs/graph/dependencies/colors.js"/></script>
+					<script src="../biosaxs/graph/dependencies/geometry.js"/></script>
+					<script src="../biosaxs/graph/networkwidget.js"/></script>
+					     
+					<!--  FORM -->
+					<script src="../biosaxs/form/experimentheaderform.js"/></script>  
+					<script src="../biosaxs/form/experimentform.js"/></script>  
+					<script src="../biosaxs/form/stocksolutionform.js"/></script>  
+					<script src="../biosaxs/form/caseform.js"/></script>  
+					<script src="../biosaxs/form/shipmentform.js"/></script>  
+					<script src="../biosaxs/form/bufferform.js"/></script>
+					<script src="../biosaxs/form/macromoleculeform.js"/></script>
+					<script src="../biosaxs/form/resultsummaryform.js"/></script>
+					
+					<!--  WINDOW -->  
+					
+					
+					<script src="../biosaxs/window/multipleeditmeasurementgridwindow.js"/></script>
+					<script src="../biosaxs/window/stocksolutionwindow.js"/></script>
+					<script src="../biosaxs/window/casewindow.js"/></script>
+					<script src="../biosaxs/window/bufferwindow.js"/></script>
+					<script src="../biosaxs/window/macromoleculewindow.js"/></script>
+					
+				
+					<!--  WIDGET -->
+					<script src="../biosaxs/widget/window/datacollectionframetree.js"/></script>	  
+					<script src="../biosaxs/widget/shippingwidget.js"/></script>
+					<script src="../biosaxs/widget/prepareexperimentwidget.js"/></script>
+					
+					<script src="../biosaxs/widget/sampleplatewidget.js"/></script>
+					<script src="../biosaxs/widget/sampleplatewidget.js"/></script>
+					<script src="../biosaxs/widget/macromoleculeresultswidget.js"/></script>
+					<script src="../biosaxs/widget/sampleplategroup_v2.js"/></script>
+					<script src="../biosaxs/widget/window/datacollectioncurvevisualizer.js"/></script>
+					<script src="../biosaxs/widget/warningwidget.js"/></script>
+					<script src="../biosaxs/widget/concentrationhtmltablewidget.js"/></script>
+					<script src="../biosaxs/widget/qualitycontrolresultswidget.js"/></script>
+				
+					<script src="../biosaxs/widget/wizard/wizardwidget.js"/></script>
+					<script src="../biosaxs/widget/wizard/genericstepwizardform.js"/></script>
+					<script src="../biosaxs/widget/wizard/experimenttypesetepwizardform.js"/></script>
+					<script src="../biosaxs/widget/wizard/macromoleculeselectorwizardform.js"/></script>
+					<script src="../biosaxs/widget/wizard/measurementcreatorstepwizardform.js"/></script>
+					<script src="../biosaxs/widget/wizard/finalstepwizardform.js"/></script>
+					
+					<script src="../biosaxs/widget/pdb/pdbviewer.js"/></script>
+					<script src="../biosaxs/widget/pdb/datacollectionpdbwidget.js"/></script>
+					 
+				    <!--  GRID -->
+				    <script src="../biosaxs/grid/volumegrid.js"/></script>
+				    <script src="../biosaxs/grid/resultsassemblygrid.js"/></script>
+				    <script src="../biosaxs/grid/stocksolutiongrid.js"/></script> 
+				    <script src="../biosaxs/grid/casegrid.js"/></script> 
+				    <script src="../biosaxs/grid/shipmentgrid.js"/></script>
+				     <!--<script src="../biosaxs/grid/abinitiogrid.js"/></script>-->
+					<script src="../biosaxs/grid/analysisgrid.js"/></script>
+					<script src="../biosaxs/grid/measurementgrid.js"/></script>
+					<script src="../biosaxs/grid/experimentgrid.js"/></script> 
+					<script src="../biosaxs/grid/templategrid.js"/></script> 
+					<script src="../biosaxs/grid/macromoleculegrid.js"/></script> 
+					<script src="../biosaxs/grid/buffergrid.js"/></script> 
+					<script src="../biosaxs/grid/specimengrid.js"/></script> 
+					<script src="../biosaxs/grid/additivegrid.js"/></script> 
+					
+					<!--  OTHERS -->  
+					<script src="../biosaxs/tabs/shipmenttabs.js"/></script>
+					<script src="../biosaxs/tabs/templatetabs.js"/></script>
+					<script src="../biosaxs/tabs/experimenttabs.js"/></script>
+					<script src="../biosaxs/tabs/resulttabs.js"/></script>
+					<script src="../biosaxs/entrypoint.js"/></script>
+					
+					
+					
+					
+					
+					
+					
+					
+
+
+
+<script>
+	Ext.onReady(function () {
+
+		Ext.Loader.setPath('Ext.ux', '../ext-4.2.1/examples/ux');
+   		Ext.QuickTips.init();
+   		
+		var jsDoc = new JSDoc(doc);
+		var jsViewer = new JSViewer(jsDoc);
+
+		
+		Ext.create('Ext.container.Viewport', {
+		    layout: 'border',
+		    items: [{
+		        region: 'north',
+		        html: '<table><tr><td></td><td><h3 class="title">ISPyB for Biosaxs Javascript Client Documentation</h3></td></tr></table>',
+		        border: false,
+		        margins: '0 0 0 0'
+		    }, {
+		        region		: 'west',
+		        collapsible	: true,
+		        title		: 'Classes',
+		        width		: 250,
+		        items		: [
+									jsViewer.getTreeClassPanel()
+		       		        ]
+		        // could use a TreePanel or AccordionLayout for navigational items
+		    },{
+		        region		: 'east',
+		        title		: 'Properties',
+		        collapsible	: true,
+		        collapsed	: true,
+		        split		: true,
+		        width		: 500,
+		        items		: [
+
+													{
+														xtype	: 'container',
+														margin	: '5 5 5 5',
+														items	: [
+																		jsViewer.getGridEventPanel()
+														]
+													},
+		        									{
+														xtype	: 'container',
+														margin	: '5 5 5 5',
+														items	: [
+																		jsViewer.getGridMethodPanel()
+														]
+			        								},
+			        								{
+				        								xtype	: 'container',
+				        								margin	: '10 5 5 5',
+														items	: [
+																		jsViewer.getPropertiesMethodPanel()
+														]
+		        									}
+													
+
+								
+	       		        ]
+		        
+		    }, {
+		        region		: 'center',
+		        id			: 'mainTabPanel',
+		       
+		        xtype		: 'tabpanel', // TabPanel itself has no title
+		        activeTab	: 0,      // First tab active by default
+		        items		: []
+		    }]
+		});
+	});
+</script>
+<body>
+
+
+</body>
+
+</html>
