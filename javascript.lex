@@ -202,7 +202,7 @@ main(int argc, char **argv)
   }
 
    
-  printf( "[\n");
+  /*printf( "[\n");*/
   for(i = 1; i < argc; i++) {
     FILE *f = fopen(argv[i], "r");
     fileName = argv[i];
@@ -221,7 +221,7 @@ main(int argc, char **argv)
 
 
   }
-   printf( "]\n");
+  /* printf( "]\n");*/
   return 0;
 }
 

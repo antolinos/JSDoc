@@ -286,6 +286,7 @@ JSViewer.prototype.onClassTreeClick = function(record){
 								afterrender : function(){
 									/** getting input data if it exists **/
 									try{
+										debugger
 										eval("_this.object = new " + jsClass.name + "();")
 										if (_this.object.input != null){
 											if (_this.object.test){
@@ -315,7 +316,8 @@ JSViewer.prototype.onClassTreeClick = function(record){
 			}
     	});
     	
-    	if (jsClass.constructor != null){
+    if (jsClass.constructor != null){
+debugger
     		if (jsClass.constructor[0] != null){
     			var events = this._parseCommentsHeader(jsClass.constructor[0].comments).events;
     			var data = new Array();
@@ -333,7 +335,7 @@ JSViewer.prototype.onClassTreeClick = function(record){
       	Ext.getCmp('mainTabPanel').setActiveTab(Ext.getCmp('mainTabPanel').items.length - 1);
     }
     else{
-    	/** it is a packache **/
+    	/** it is a package **/
     	var interfaceMethod = new Object();
     	for ( var i = 0; i < record.childNodes.length; i++) {
     		var methods = this.jsDoc.getByClassName(record.childNodes[i].data.text).methods;
@@ -359,11 +361,13 @@ JSViewer.prototype.onClassTreeClick = function(record){
     	
     	
     	html = html + "<h1>Methods</h1>";
+
     	for ( var i = 0; i < record.childNodes.length; i++) {
     		var methods = this.jsDoc.getByClassName(record.childNodes[i].data.text).methods;
     		html = html + "<li class='classHeaderName'> " + record.childNodes[i].data.text + "</li>" ;
     		html = html + "<table style='width:600px;'>" ;
     		html = html + "<tr ><th class='methodTableHeader'>Method</th><th class='methodTableHeader'>Parameters</th><th class='methodTableHeader'>Comments</th>" ;
+		
     		for ( var j = 0; j < methods.length; j++) {
     			var className = 'small';
     			if (interfaceMethod[ methods[j].name].length == record.childNodes.length){
@@ -380,7 +384,7 @@ JSViewer.prototype.onClassTreeClick = function(record){
     			}
     		}
     		html = html + "</table><br />";
-		}
+	}
     	
     	
     	Ext.getCmp('mainTabPanel').insert({
